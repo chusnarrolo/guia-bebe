@@ -392,8 +392,9 @@
     <label class="form-label" for="birthdate">Fecha de nacimiento</label>
     <input type="text" id="birthdate" class="form-input" placeholder="Elige la fecha de nacimiento" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'" />
     <button class="form-btn" onclick="showGuide()">Ver guía de esta semana</button>
-    <p class="form-note">La información se actualiza automáticamente cada vez que abres la página.</p>
   </div>
+  <p class="form-note" style="margin-top:1.5rem;">⚠️ Aviso: la información que aparece es generada por inteligencia artificial, sacada de fuentes fiables.</p>
+  <p class="form-note" style="margin-top:0.5rem;">Hecho con ♥️ por Chus Naharro de <a href="https://movidasdeemprender.substack.com/" target="_blank" style="color:var(--ink-soft);text-decoration:underline;">Movidas de emprender</a></p>
 </div>
 
 <!-- PANTALLA GUÍA -->
@@ -684,7 +685,7 @@ function showGuide() {
       : s.type === 'alert' ? '<div class="alert-card">' + s.content + '</div>'
       : '<div class="tip-card">' + s.content + '</div>') +
     '</div>'
-  ).join('') + '<p class="refresh-note">La información se actualiza automáticamente según la edad del bebé.</p>';
+  ).join('') + '<p class="refresh-note">La información se actualiza automáticamente según la edad del bebé.</p><p class="refresh-note" style="margin-top:0.5rem;">⚠️ Aviso: la información que aparece es generada por inteligencia artificial, sacada de fuentes fiables.</p><p class="refresh-note" style="margin-top:0.5rem;">Hecho con ♥️ por Chus Naharro de <a href="https://movidasdeemprender.substack.com/" target="_blank" style="color:var(--ink-soft);text-decoration:underline;">Movidas de emprender</a></p>';
 
   document.getElementById('screen-home').style.display = 'none';
   document.getElementById('screen-guide').style.display = 'block';
