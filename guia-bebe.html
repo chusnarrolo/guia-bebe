@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía semanal para tu bebé</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8;
+    --sand-dark: #ede5d5;
+    --ink: #1a1410;
+    --ink-mid: #5c4a38;
+    --ink-soft: #9c8470;
+    --sage: #5a7a6a;
+    --sage-light: #d4e4dc;
+    --rust: #b05a30;
+    --rust-light: #f0d8cc;
+    --gold: #c8a050;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--sand);
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── PANTALLA DE ENTRADA ── */
+  #screen-home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  .home-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+  }
+
+  .home-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    max-width: 560px;
+  }
+
+  .home-title em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .home-subtitle {
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 420px;
+    margin: 0 auto 3rem;
+  }
+
+  .form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem 2rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(26,20,16,0.08);
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--ink-mid);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    text-align: left;
+  }
+
+  .form-input {
+    width: 100%;
+    max-width: 100%;
+    padding: 1.1rem 1rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--sand);
+    border: 1.5px solid var(--sand-dark);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 1.2rem;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .form-input:focus {
+    border-color: var(--rust);
+  }
+
+  .form-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background: var(--ink);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .form-btn:hover { background: var(--rust); }
+
+  .form-note {
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    margin-top: 1rem;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* ── PANTALLA GUÍA ── */
+  #screen-guide { display: none; }
+
+  .guide-header {
+    background: var(--ink);
+    color: white;
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+  }
+
+  .guide-badge {
+    display: inline-block;
+    background: var(--rust);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .guide-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+
+  .guide-title em { font-style: italic; color: var(--gold); }
+
+  .guide-age {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    margin-top: 0.3rem;
+  }
+
+  .guide-body {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .section {
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .section:nth-child(1) { animation-delay: 0.1s; }
+  .section:nth-child(2) { animation-delay: 0.2s; }
+  .section:nth-child(3) { animation-delay: 0.3s; }
+  .section:nth-child(4) { animation-delay: 0.4s; }
+  .section:nth-child(5) { animation-delay: 0.5s; }
+  .section:nth-child(6) { animation-delay: 0.6s; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-verde { background: var(--sage); }
+  .dot-azul { background: #6080b0; }
+  .dot-naranja { background: var(--rust); }
+  .dot-amarillo { background: var(--gold); }
+  .dot-rojo { background: #b04040; }
+  .dot-morado { background: #7060a0; }
+
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 1.2rem 1.4rem;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .item-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .item-list li {
+    font-size: 0.875rem;
+    color: var(--ink-mid);
+    font-weight: 300;
+    line-height: 1.55;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .item-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-soft);
+    font-size: 0.7rem;
+    top: 0.2rem;
+  }
+
+  .alert-card {
+    background: #fff8f5;
+    border-left: 3px solid var(--rust);
+    border-radius: 0 10px 10px 0;
+    padding: 1rem 1.2rem;
+    font-size: 0.875rem;
+    color: var(--ink-mid);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .tip-card {
+    background: var(--sage-light);
+    border-radius: 14px;
+    padding: 1.2rem 1.4rem;
+  }
+
+  .tip-card p {
+    font-size: 0.875rem;
+    color: #2a4a38;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .feeding-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+
+  @media (max-width: 520px) {
+    .feeding-grid { grid-template-columns: 1fr; }
+  }
+
+  .feeding-block {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .feeding-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .feeding-label span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .label-pecho span { background: var(--rust); }
+  .label-biberon span { background: #6080b0; }
+
+  .activity-card {
+    background: #fdf8ee;
+    border: 1px solid rgba(200,160,80,0.25);
+    border-radius: 14px;
+    padding: 1.2rem 1.4rem;
+  }
+
+  .activity-name {
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .activity-card p {
+    font-size: 0.875rem;
+    color: var(--ink-mid);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    margin-bottom: 1.2rem;
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  .back-btn:hover { color: white; }
+
+  .refresh-note {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    margin-top: 2rem;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 480px) {
+    .form-card { padding: 1.5rem; }
+    .guide-header { padding: 2rem 1rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PANTALLA INICIO -->
+<div id="screen-home">
+  <p class="home-eyebrow">Guía semanal</p>
+  <h1 class="home-title">Lo que necesitas saber esta <em>semana</em></h1>
+  <p class="home-subtitle">Introduce la fecha de nacimiento de tu bebé y recibe información adaptada a su edad: desarrollo, sueño, lactancia y una actividad para hacer juntos en casa.</p>
+
+  <div class="form-card">
+    <label class="form-label" for="birthdate">Fecha de nacimiento</label>
+    <input type="text" id="birthdate" class="form-input" placeholder="Elige la fecha de nacimiento" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'" />
+    <button class="form-btn" onclick="showGuide()">Ver guía de esta semana</button>
+    <p class="form-note">La información se actualiza automáticamente cada vez que abres la página.</p>
+  </div>
+</div>
+
+<!-- PANTALLA GUÍA -->
+<div id="screen-guide">
+  <div class="guide-header">
+    <button class="back-btn" onclick="goBack()">← Cambiar fecha</button>
+    <div class="guide-badge" id="weekBadge">Semana</div>
+    <h1 class="guide-title">Guía de esta <em>semana</em></h1>
+    <p class="guide-age" id="ageDisplay"></p>
+  </div>
+  <div class="guide-body" id="guideContent"></div>
+</div>
+
+<script>
+const weeklyData = {
+  0: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Solo ve a unos 20-30 cm de distancia: justo la distancia a tu cara cuando le das de comer.", "Reconoce tu voz desde el primer día: la escuchó durante meses dentro del útero.", "Sus movimientos son reflejos: succionar, agarrar, el reflejo de Moro (se asusta y abre los brazos).", "Puede imitar expresiones faciales simples si te acercas: saca la lengua si tú lo haces."] },
+    sueno: { titulo: "Sueño y confusión día/noche", items: ["Los recién nacidos no tienen aún conciencia del día y la noche. Duermen a lo largo de las 24 horas sin distinción.", "Durante las tomas y cambios de pañal nocturnos: luces en penumbra, silencio, sin juegos ni conversación.", "De día, cuando esté despierto: luz natural, habla con él. El contraste luz/oscuridad es la señal principal para regular el ritmo circadiano.", "La confusión día/noche se resuelve sola, generalmente entre las 6 y 12 semanas de vida."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Entre 8 y 12 tomas en 24 horas, incluyendo las nocturnas. La prolactina alcanza sus niveles más altos por la noche: las tomas nocturnas son clave.", "Señales de ingesta suficiente: 6 o más pañales mojados al día con orina casi incolora (desde el 5.º-7.º día).", "Ganancia de peso esperada: 150-200 g por semana los primeros meses (AEP). Debe recuperar el peso al nacimiento hacia el día 10-14."], biberon: ["El estómago tiene el tamaño de una canica. En los primeros días, 5-7 ml por toma es suficiente; aumenta progresivamente.", "Señales de ingesta suficiente: 6 o más pañales mojados al día con orina casi incolora (desde el 5.º-7.º día).", "Ganancia de peso esperada: 150-200 g por semana los primeros meses (AEP). Debe recuperar el peso al nacimiento hacia el día 10-14."] },
+    actividad: { nombre: "Cara a cara", descripcion: "Acércate a unos 20-30 cm de su cara y háblale suavemente. Los bebés tienen preferencia natural por los rostros humanos. Puedes sacar la lengua despacio y observar si intenta imitarte: es uno de los primeros intercambios posibles. No necesitas más de 2-3 minutos." },
+    alerta: "Consulta si tiene fiebre superior a 38°C, si hace menos de 6 pañales mojados al día a partir del 5.º día, si la orina es oscura o anaranjada, o si no recupera el peso del nacimiento antes del día 14.",
+    consejo: "El contacto piel con piel no es solo cariño: regula su temperatura, su ritmo cardíaco y, en caso de lactancia, estimula la producción de leche. No puedes malacostumbrarle a esta edad, es fisiológicamente imposible."
+  },
+  1: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Empieza a seguir objetos en movimiento con los ojos, aunque todavía se le escapan.", "Las expresiones de su cara se vuelven algo más variadas.", "El reflejo de agarre es muy fuerte: aprieta tu dedo con sorprendente fuerza.", "Puede levantar la cabeza brevemente boca abajo, solo unos segundos."] },
+    sueno: { titulo: "Sueño y confusión día/noche", items: ["Sigue sin distinguir el día de la noche. Es normal que esté más despierto por la tarde-noche.", "Mantén el contraste: luz y actividad de día, penumbra y calma de noche.", "Los ciclos de sueño duran entre 45-60 minutos. Si se despierta al acostarlo, probablemente aún no ha alcanzado el sueño profundo.", "Total de sueño diario: 16-18 horas repartidas sin distinción de horario."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Primera crisis de demanda habitual entre el día 7 y el 10: querrá mamar de forma casi continua 1-3 días. Es un brote de crecimiento, no falta de leche.", "No suplementes con fórmula en este momento sin consejo profesional: reduciría tu producción.", "Mínimo 6 pañales mojados al día es el indicador más fiable de buena ingesta."], biberon: ["Unos 60-90 ml por toma, cada 2-3 horas. Sigue las señales de hambre del bebé.", "Mínimo 6 pañales mojados al día es el indicador más fiable de buena ingesta.", "Si hay ictericia (piel amarilla) más allá del día 14, consulta al pediatra."] },
+    actividad: { nombre: "Sonajero al oído", descripcion: "Con un sonajero o cascabel, haz un sonido suave a un lado de su cabeza durante 30-40 segundos. Esta semana probablemente cierre los ojos o mueva la boca al escucharlo. Entre el segundo y tercer mes empezará a girar la cabeza buscando el sonido. Repítelo unas pocas veces y descansa." },
+    alerta: "Si la ictericia persiste más allá del día 14, si el bebé está excesivamente somnoliento y no pide comer, o si hay pérdida de peso superior al 10% del peso al nacimiento, consulta urgente.",
+    consejo: "Esta semana suele coincidir con el pico de cansancio inicial. Acepta cualquier ayuda que te ofrezcan y duerme cuando el bebé duerma aunque sea de día."
+  },
+  2: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Algunos bebés empiezan a esbozar la primera sonrisa social, aunque la más clara llega hacia las 6-8 semanas.", "Sigue objetos lentos con los ojos con más coordinación.", "Puede estar despierto y alerta por períodos de 30-60 minutos.", "El control de la cabeza mejora muy ligeramente en posición boca abajo."] },
+    sueno: { titulo: "Sueño y confusión día/noche", items: ["La confusión día/noche puede seguir siendo marcada. Es normal.", "Puede aparecer un período algo más largo de sueño (3-4 horas) una vez por noche, aunque no siempre.", "Sigue aplicando la misma estrategia: máximo contraste entre el día (luz, estímulos) y la noche (penumbra, silencio, tomas tranquilas).", "No le quites siestas de día pensando que así dormirá más de noche: un bebé descansado duerme mejor."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Segunda crisis de demanda habitual alrededor de las 3 semanas: el bebé querrá mamar constantemente 24-48 horas. Ofrece el pecho siempre que lo pida.", "Si notas los pechos más blandos, no significa que tengas menos leche: tu cuerpo empieza a producir a demanda en lugar de acumular.", "Las tomas nocturnas siguen siendo clave para mantener la producción de prolactina."], biberon: ["Unos 90 ml por toma, cada 3 horas aproximadamente.", "Sigue las señales de hambre: chupeteo, manos a la boca, girar la cabeza. El llanto es la última señal.", "Mínimo 6 pañales mojados al día."] },
+    actividad: { nombre: "Contraste visual", descripcion: "Coge un papel con rayas en blanco y negro y colócalo a unos 25-30 cm de su cara. Los bebés a esta edad distinguen mejor los contrastes altos. Observa cómo fija la mirada. Cuando aparte la vista, ha tenido suficiente. No más de 2-3 minutos por sesión." },
+    alerta: "Si se arquea mucho durante las tomas, llora inconsolablemente después de comer o vomita con fuerza proyectando la leche, coméntalo con el pediatra. Puede ser reflujo.",
+    consejo: "Semana 3 es conocida como una de las más exigentes. El cansancio se acumula y el bebé puede estar más irritable. Es completamente normal y pasará."
+  },
+  3: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Aparecen las primeras sonrisas sociales reales como respuesta a tu cara o tu voz.", "Se fija más en los contrastes: le atraen los patrones en blanco y negro.", "Puede seguir un objeto 180 grados con los ojos.", "Hace sonidos guturales pequeños además del llanto."] },
+    sueno: { titulo: "Sueño y confusión día/noche", items: ["Alrededor del mes puede empezar a mejorar la distinción día/noche para algunos bebés, aunque para muchos sigue siendo difusa.", "Total de sueño: unas 15-16 horas, algo menos que al principio.", "Empieza a mostrar señales de cansancio más claras: frotar ojos, mirada perdida, bostezos.", "Sigue manteniendo el ambiente nocturno lo más oscuro y silencioso posible durante las tomas."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Las tomas pueden variar en duración de un día a otro. Es normal.", "Alrededor de las 4 semanas puede haber otra crisis de crecimiento: más demanda durante varios días.", "Indicadores de buena lactancia: 6+ pañales mojados al día, heces amarillo mostaza, ganancia de peso de 150-200 g semanales."], biberon: ["Unos 90-120 ml por toma, 6-8 veces al día.", "Indicadores de buena ingesta: bebé tranquilo entre tomas, ganancia de peso adecuada, 6+ pañales mojados al día."] },
+    actividad: { nombre: "Protoconversación", descripcion: "Cuando esté despierto y tranquilo, míralo a los ojos y háblale despacio. Cuando hagas una pausa, espera: probablemente mueva la boca o haga un sonido. Entonces respondes tú. No necesitas decir nada especial, vale con describirle lo que estás haciendo." },
+    alerta: "Las fontanelas (los huecos del cráneo) deben estar planas o ligeramente hundidas. Si las notas muy abultadas o muy hundidas, consulta.",
+    consejo: "Ya lleváis un mes. Si tienes dudas con la lactancia, una asesora de lactancia certificada (IBCLC) puede resolverlas en una sola sesión. En España hay más de 580."
+  },
+  4: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["La sonrisa social ya es más frecuente y clara: responde a tu cara y tu voz.", "Mueve los brazos y piernas con más intención, aunque todavía sin coordinación.", "Empieza a vocalizar más: pequeños 'ah', 'oh', sonidos de gorgoteo.", "Puede aguantar la cabeza unos segundos más en posición vertical."] },
+    sueno: { titulo: "Sueño", items: ["Alrededor del mes puede aparecer la primera regresión del sueño: más despertares, más necesidad de contacto.", "El ciclo de sueño sigue siendo corto: 45-50 minutos. Que se despierte al acabar un ciclo es fisiológicamente normal.", "Ir estableciendo una rutina suave antes de dormir empieza a tener sentido: toma tranquila, oscuridad, arrullo."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Crisis de crecimiento habitual entre las semanas 4-6: querrá mamar mucho más durante varios días. Ofrece el pecho siempre que lo pida.", "Pechos blandos no significa poca leche: a partir de las 2-3 semanas la producción se regula y ya no se acumula.", "Primera revisión del mes: si la ganancia de peso no es la esperada, pide apoyo de un profesional en lactancia antes de plantear suplementación."], biberon: ["Unos 120 ml por toma, 5-6 veces al día.", "Primera revisión del mes con el pediatra: buena oportunidad para resolver dudas sobre cantidades y frecuencia."] },
+    actividad: { nombre: "Tiempo boca abajo", descripcion: "Colócalo boca abajo sobre tu pecho o en una superficie firme durante 2-3 minutos mientras está despierto y tú lo vigilas. Fortalece el cuello, los brazos y la espalda, y previene la plagiocefalia. Va a protestar: es normal. Empieza con pocos segundos y ve aumentando cada día." },
+    alerta: "Primera revisión del mes con el pediatra. Si la ganancia de peso no es la esperada, pide apoyo de un profesional en lactancia antes de plantear cualquier suplementación.",
+    consejo: "El tiempo boca abajo supervisado es una de las actividades más importantes de estos primeros meses. Hazlo varias veces al día en sesiones cortas."
+  },
+  5: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Le encanta mirarte a la cara y mantiene contacto visual varios segundos.", "Empieza a 'hablar' contigo: vocaliza, tú respondes, él vocaliza de nuevo.", "Mueve la cabeza para seguir sonidos.", "Las manos le fascinarán pronto: las mirará como si fueran lo más interesante del mundo."] },
+    sueno: { titulo: "Sueño", items: ["Algunos bebés empiezan a dar un tramo nocturno de 4-5 horas. Muchos todavía no, y es completamente normal.", "Total diario: unas 14-16 horas, con 3-4 siestas.", "Si duerme bien de día duerme mejor de noche. No le quites las siestas."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["El ritmo de tomas empieza a ser algo más predecible. Sigue a demanda.", "Las tomas nocturnas siguen siendo importantes para mantener la producción de prolactina.", "Semana 6 se acerca: suele haber una crisis de crecimiento importante, prepárate para varios días de mucha demanda."], biberon: ["Unos 120 ml por toma, cada 3-4 horas.", "Sigue las señales de hambre del bebé: no hace falta que acabe el biberón si parece satisfecho antes."] },
+    actividad: { nombre: "Canción con movimiento", descripcion: "Mientras lo tienes en brazos, cántale una canción sencilla moviendo suavemente sus brazos o piernas al ritmo. No importa que no sepas cantar: el bebé responde a la melodía de tu voz. Esto trabaja el vínculo, el ritmo y la coordinación auditivo-visual." },
+    alerta: "Si a las 6 semanas no sonríe en respuesta a tu cara, no sigue objetos con los ojos o no reacciona a los sonidos, coméntalo con el pediatra.",
+    consejo: "Las 6 semanas son habitualmente el pico de llanto del bebé. Pide ayuda antes de necesitarla."
+  },
+  6: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Semana 6: pico máximo de llanto para muchos bebés. A partir de aquí suele mejorar progresivamente.", "La sonrisa social es ya clara y frecuente. Puede sonreír en respuesta a la voz sola.", "Empieza a descubrir sus manos, aunque todavía no las controla.", "Sigue objetos con fluidez, incluso cuando te mueves lentamente."] },
+    sueno: { titulo: "Sueño", items: ["Algunos bebés muestran patrones más claros de sueño-vigilia a partir de esta semana.", "Todavía es normal levantarse 2-3 veces por noche.", "La luz del día y la oscuridad nocturna siguen siendo las señales más efectivas para regular el ritmo circadiano."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Crisis de crecimiento de las 6 semanas: puede ser la más intensa hasta ahora. Días de demanda muy alta. Es el mecanismo del cuerpo para aumentar la producción.", "Si has tenido dificultades con el agarre o el dolor, todavía estás a tiempo de resolverlo con una asesora de lactancia certificada (IBCLC)."], biberon: ["Unos 120-150 ml por toma, 5-6 veces al día.", "Si el bebé parece querer más al acabar el biberón, sube de 15 en 15 ml y observa."] },
+    actividad: { nombre: "Espejo", descripcion: "Coloca un espejo irrompible frente a su cara. Le resultará fascinante aunque no sabe que es él. Puedes acercar también tu cara junto a la suya para que os vea a los dos. Esto estimula la visión, la atención y las primeras nociones de reconocimiento de rostros." },
+    alerta: "Revisa tu propio estado: la depresión postparto puede aparecer en cualquier momento durante el primer año. Si la tristeza persiste o se intensifica, busca ayuda profesional.",
+    consejo: "Esta suele ser la semana más dura. Si llegáis a ella relativamente bien, lo más difícil ya habrá pasado. El mes siguiente trae más sonrisas y un bebé que interactúa mucho más."
+  },
+  7: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["El llanto empieza a disminuir para la mayoría de los bebés a partir de esta semana.", "Vocaliza más variedad de sonidos: gorgoritos, pequeños chillidos de felicidad.", "Sigue objetos con la mirada de forma más fluida.", "Aguanta mejor la cabeza en posición vertical pegado a tu pecho."] },
+    sueno: { titulo: "Sueño", items: ["Puede aparecer un período de sueño más largo por la noche: entre 4 y 6 horas para algunos bebés.", "Las siestas empiezan a ser algo más predecibles.", "Total diario: unas 14-15 horas."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["El ritmo de tomas puede estabilizarse un poco. Puede mostrar más distracción durante las tomas: se suelta, mira alrededor. Es normal.", "Si empieza a dar algún tramo más largo por la noche, tu cuerpo se adapta. Pero si los pañales bajan de 6 al día, ofrece más tomas."], biberon: ["Unos 120-150 ml por toma, 5-6 veces al día.", "Sigue las señales de hambre y saciedad del bebé."] },
+    actividad: { nombre: "Móvil casero", descripcion: "Cuelga a unos 30 cm sobre él (ligeramente ladeado, no encima de la cara) objetos con colores vivos: una cuchara de madera, un pañuelo de colores, figuras recortadas en blanco y negro. Observará los movimientos y empezará a intentar manotearlos en las próximas semanas." },
+    alerta: "Si notas fiebre, rechazo brusco del alimento o una caída repentina en el número de pañales mojados, consulta.",
+    consejo: "Es buen momento para empezar a establecer una rutina nocturna simple: toma tranquila, oscuridad, arrullo o canción."
+  },
+  8: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Dos meses: hito importante. Empieza a interactuar de forma mucho más activa.", "Sonrisa social frecuente y genuinamente social.", "Gorgoritos y vocalizaciones más largas: empieza a responderte en las conversaciones.", "Control de la cabeza mejorado: puede mantenerla erguida varios segundos apoyado en tu hombro."] },
+    sueno: { titulo: "Sueño", items: ["Algunos bebés consolidan un tramo nocturno de 5-6 horas. Muchos todavía no, y es completamente normal.", "Las siestas empiezan a ser 3-4 al día, algo más organizadas.", "Alrededor de las 8 semanas puede haber un salto de desarrollo que altere el sueño varios días."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Crisis de crecimiento habitual entre las semanas 7-8. Ofrece el pecho siempre que lo pida.", "Vacunas de los 2 meses: ofrece el pecho con frecuencia después. La succión consuela y la leche materna contiene factores que apoyan la respuesta inmune.", "La leche materna es el único alimento necesario hasta los 6 meses."], biberon: ["Unos 150 ml por toma, 5-6 veces al día.", "Vacunas de los 2 meses: el bebé puede estar más irritable o somnoliento 24-48 horas después. Es normal.", "La fórmula es el único alimento necesario hasta los 6 meses."] },
+    actividad: { nombre: "Elevaciones suaves", descripcion: "Tumbado boca arriba, sujétale las manos (él apretará tu dedo con fuerza) y ayúdale a incorporarse muy suavemente hasta quedar semierguido, sosteniéndole los hombros si la cabeza cae hacia atrás. Es normal que no aguante aún. Este ejercicio trabaja el control del cuello y el tronco. Hazlo 3-4 veces con calma." },
+    alerta: "Vacunas de los 2 meses según el calendario de tu comunidad autónoma. Fiebre leve posterior es normal. Si supera los 38°C o el bebé parece muy decaído, consulta.",
+    consejo: "Respóndele cuando vocaliza imitando sus sonidos. Esta protoconversación es la base del desarrollo del lenguaje."
+  },
+  9: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Las manos le fascinan: las mira, las lleva a la boca, intenta juntarlas.", "Puede seguir un objeto 180 grados con los ojos.", "Responde a tu voz girando la cabeza hacia el sonido.", "Los sonidos que hace son más variados y melodiosos."] },
+    sueno: { titulo: "Sueño", items: ["Puede ir tomando forma una ventana de sueño más larga por la noche.", "Las señales de cansancio son más claras: frotar ojos, apartar la mirada, bostezo.", "Respetar esas señales evita que sea más difícil dormirlo."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Puede distraerse mucho durante las tomas si hay movimiento o ruido alrededor. Busca un lugar tranquilo.", "Las tomas nocturnas pueden seguir siendo 2-3. Es completamente normal.", "Sigue sin necesitar ningún complemento."], biberon: ["Unos 150 ml por toma, 5-6 veces al día.", "Sigue sin necesitar ningún alimento adicional hasta los 6 meses."] },
+    actividad: { nombre: "Texturas en la mano", descripcion: "Pon en su mano objetos con texturas diferentes: un trozo de tela suave, un pañuelo de seda, una toallita de rizo. Observa cómo los agarra y los explora. Esto estimula el sentido del tacto y la coordinación prensión-visión, que empieza a desarrollarse activamente estas semanas." },
+    alerta: "Si notas que los pañales bajan de 6 al día o que la ganancia de peso se estanca, consulta con el pediatra o un profesional de lactancia.",
+    consejo: "Empieza a mostrarle libros de cartón con imágenes de alto contraste. Su sistema visual se está desarrollando muy activamente."
+  },
+  10: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Puede sujetar un objeto ligero en la mano durante unos segundos si se lo pones.", "Las risas empiezan a aparecer: primero como un sonido, luego más claramente.", "Se reconoce en el espejo: le resultará fascinante aunque no sabe que es él.", "En posición boca abajo aguanta mejor la cabeza y puede levantarla a 45 grados."] },
+    sueno: { titulo: "Sueño", items: ["Total diario: unas 14-15 horas.", "Muchos bebés consolidan 3 siestas al día más o menos definidas.", "Puede haber un salto de desarrollo alrededor de la semana 12 que revuelva el sueño temporalmente."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Sigue a demanda. Los indicadores clave siguen siendo los mismos: 6+ pañales mojados al día y ganancia de peso adecuada.", "Es normal que las tomas sean cada vez más cortas pero más eficientes: el bebé ha aprendido a vaciar el pecho rápido."], biberon: ["Unos 150 ml por toma, 5-6 veces al día.", "La fórmula sigue siendo el alimento principal y exclusivo hasta los 6 meses."] },
+    actividad: { nombre: "Colgador de juguetes", descripcion: "Cuelga a la altura de sus manos (cuando está tumbado boca arriba) un juguete ligero que pueda golpear. Empieza a intentar alcanzar y golpear objetos de forma intencional. Cuando lo consiga su cara cambiará: está descubriendo que puede causar cosas con su cuerpo." },
+    alerta: "Si no ríe, no vocaliza, no sigue objetos o parece no reaccionar a los sonidos a los 3 meses, consulta con el pediatra.",
+    consejo: "El tiempo boca abajo sigue siendo muy importante. Intenta hacer 10-15 minutos al día repartidos en varias sesiones."
+  },
+  11: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["La risa ya es clara y frecuente. Buscará activamente hacerte reír también.", "Empieza a manotear objetos que cuelgan delante de él.", "Sus movimientos son más suaves y coordinados.", "Puede sostener su peso sobre las piernas si lo aguantas de pie, durante un momento."] },
+    sueno: { titulo: "Sueño", items: ["Alrededor de las 12 semanas puede aparecer una regresión del sueño coincidiendo con el salto de desarrollo.", "Los bebés que antes dormían bien pueden empezar a despertarse más durante unos días.", "Es temporal. No es el momento de cambiar nada estructuralmente, sino de acompañar."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Puede distraerse mucho al mamar. Busca un lugar tranquilo.", "Alrededor de las 12 semanas los pechos se vuelven más blandos de forma definitiva y las tomas son más cortas. No es señal de poca leche: la lactancia se ha regulado.", "Sigue sin necesitar ningún alimento adicional."], biberon: ["Unos 150-180 ml por toma, 5 veces al día.", "Sigue sin necesitar ningún alimento adicional hasta los 6 meses."] },
+    actividad: { nombre: "Hacer pie", descripcion: "Aguántalo de pie sobre tus muslos mientras lo sostienes bien. Notarás que apoya y empuja con las piernas instintivamente. No le estás enseñando a andar, simplemente estás permitiendo que ejercite ese reflejo. Le encanta la postura erguida y la perspectiva diferente que le ofrece." },
+    alerta: "Revisión de los 3 meses con el pediatra próximamente. Buena oportunidad para resolver dudas sobre desarrollo, sueño y alimentación.",
+    consejo: "A esta edad ya puedes leerle cuentos cortos en voz alta. Los libros de tela con texturas son perfectos."
+  },
+  12: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Tres meses: gran salto de desarrollo. Se le nota cualitativamente diferente.", "Agarra objetos con intención y se los lleva a la boca.", "La comunicación es muy activa: chilla, gorgorea, ríe, cambia de expresión.", "En posición boca abajo puede levantar la cabeza a 90 grados y apoyarse en los antebrazos."] },
+    sueno: { titulo: "Sueño", items: ["El ritmo circadiano empieza a asentarse. Días más despierto, noches algo más largas.", "Puede empezar a tener 2-3 siestas más definidas.", "Muchos bebés siguen despertándose 1-3 veces por noche. Es completamente normal."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Exclusiva hasta los 6 meses. Ningún sólido antes, aunque el bebé mire la comida o babee: no son señales de que esté listo.", "Puede haber una crisis de crecimiento alrededor de las 13 semanas.", "Si suelta el pecho para mirar alrededor, es desarrollo normal, no rechazo."], biberon: ["Unos 150-180 ml por toma, 5 veces al día.", "Ningún sólido antes de los 6 meses aunque el bebé muestre interés por la comida: no es una señal de madurez suficiente."] },
+    actividad: { nombre: "Gimnasia de brazos y piernas", descripcion: "Tumbado boca arriba, mueve sus brazos y piernas suavemente: brazos en cruz y luego al centro, piernas doblando las rodillas hacia la barriga. Habla o canta mientras lo haces. A los 3 meses empieza a disfrutar más del movimiento activo y la interacción durante el juego." },
+    alerta: "La introducción de sólidos no debe hacerse antes de los 6 meses según la OMS y la AEP. Ni papillas, ni cereales, ni zumos.",
+    consejo: "A los 3 meses empieza a ser interesante el juego activo: espejito delante, colgadores de juguetes al alcance de sus manos, móviles que pueda golpear."
+  },
+  13: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Gira activamente la cabeza para seguir sonidos y voces familiares.", "Empieza a balbucear con más variedad: encadena sílabas y entonaciones.", "Puede apoyarse en los antebrazos boca abajo y mantener la posición varios minutos.", "Le gusta 'hablar' con personas desconocidas: es sociable y curioso."] },
+    sueno: { titulo: "Sueño", items: ["A los 4 meses se incorporan fases de sueño que al nacer no existían. Esto produce un aumento de despertares: se llama regresión del sueño de los 4 meses.", "No es un retroceso, es una maduración neurológica normal. Requiere paciencia.", "Total diario: unas 12-16 horas (NSF). Suele haber 3-4 siestas."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Crisis de los 3 meses aún activa. El bebé hace tomas cortas y puede protestar al pecho: no es rechazo, sino mayor eficiencia y más distracción.", "La leche puede tener un sabor más salado en este período, lo que incomoda a algunos bebés unos días.", "Sigue sin necesitar ningún alimento adicional."], biberon: ["Unos 150-180 ml por toma, 5 veces al día.", "Sigue sin necesitar ningún alimento adicional."] },
+    actividad: { nombre: "Perseguir el sonido", descripcion: "Con el bebé tumbado boca arriba, haz sonar un sonajero a un lado de su cabeza y observa cómo gira para buscarlo. Luego cambia al otro lado. Trabaja la coordinación auditivo-motora y el inicio del movimiento intencional de la cabeza." },
+    alerta: "La regresión del sueño de los 4 meses puede confundirse con hambre. En lactancia materna, esto no indica falta de leche: no es el momento de suplementar sin consejo profesional.",
+    consejo: "Si el bebé duerme peor de repente, recuerda que es una etapa neurológica, no un problema que tengas que resolver. Pasará sola en 2-6 semanas."
+  },
+  14: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Empieza a intentar darse la vuelta: de boca arriba a boca abajo. Puede conseguirlo o estar muy cerca.", "Agarra objetos con más precisión y los pasa de una mano a otra.", "Ríe con carcajadas ante estímulos que le hacen gracia.", "Le interesan mucho los espejos y los bebés de su edad."] },
+    sueno: { titulo: "Sueño", items: ["La regresión del sueño de los 4 meses puede estar en su punto más activo. Más despertares nocturnos, siestas más cortas.", "Es temporal. Mantén la rutina nocturna.", "Total diario: 12-16 horas, con varias siestas."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Sigue a demanda. En este período es habitual que la demanda nocturna aumente por los cambios en el sueño: no indica falta de leche.", "No suplementes por los cambios en el sueño sin consejo profesional."], biberon: ["Unos 150-180 ml por toma, 4-5 veces al día.", "La leche de fórmula cubre el 100% de sus necesidades hasta los 6 meses."] },
+    actividad: { nombre: "Incentivo para voltear", descripcion: "Colócalo boca arriba y pon un juguete llamativo a un lado, ligeramente fuera de su alcance. Puede intentar girarse para alcanzarlo. Ayúdale doblando su rodilla hacia el lado del juguete para que entienda el movimiento. Supervisa siempre." },
+    alerta: "Si a los 4 meses no sujeta la cabeza de forma estable, no lleva objetos a la boca, no sonríe, no vocaliza o no sigue objetos con la mirada, consulta con el pediatra.",
+    consejo: "Cuando empiece a voltear, revisa el entorno: nunca lo dejes solo en lugares elevados como el cambiador o el sofá."
+  },
+  15: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Muchos bebés ya se voltean de boca arriba a boca abajo esta semana.", "Explora los objetos con la boca: es su principal herramienta de conocimiento ahora.", "Distingue tonos rojos, azules y amarillos. La visión de colores se ha desarrollado mucho.", "Empieza a reconocer su nombre aunque no lo entienda conceptualmente."] },
+    sueno: { titulo: "Sueño", items: ["Para algunos bebés la regresión del sueño empieza a estabilizarse.", "Puede empezar a consolidar 3 siestas más definidas.", "Total diario: 12-16 horas."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Sigue a demanda. La producción se adapta perfectamente a sus necesidades.", "Resistir la tentación de introducir cereales 'para que duerma más': no tiene base científica y puede ser perjudicial."], biberon: ["Unos 150-180 ml por toma, 4-5 veces al día.", "Introducir cereales 'para que duerma más' no tiene base científica y no se recomienda antes de los 6 meses."] },
+    actividad: { nombre: "Cucú-trás", descripcion: "Tapa tu cara con las manos o un pañuelo y di '¿dónde está mamá/papá?' y luego descúbrete diciendo '¡cucú!'. Le parecerá divertidísimo. Además de ser un juego de vínculo, le está enseñando que las personas existen aunque no las vea: el inicio de la permanencia del objeto." },
+    alerta: "Ahora que puede voltarse, asegúrate de que la zona donde duerme es segura: sin almohadas, sin ropa de cama suelta, sin objetos blandos en la cuna.",
+    consejo: "A partir de que empieza a voltarse, puede acabar boca abajo mientras duerme. La recomendación es seguir poniéndolo boca arriba al dormirle; si se gira solo, no hace falta que lo vuelvas a colocar."
+  },
+  16: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Cuatro meses: hito importante. El bebé empieza a mostrar mucho más carácter.", "Se sienta con apoyo y le gusta la posición erguida para ver el mundo.", "Muestra preferencias claras: personas, juguetes, posiciones, momentos del día.", "Puede protestar cuando se le quita algo que le gusta."] },
+    sueno: { titulo: "Sueño", items: ["A los 4 meses el sueño empieza a parecerse más al del adulto, con 5 fases. Esto es la causa de los mayores despertares.", "La regresión puede durar entre 2 y 6 semanas. Luego suele mejorar.", "Total diario: 12-16 horas, con 3-4 siestas."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Sigue a demanda, incluyendo de noche.", "Revisión de los 4 meses: pueden hablar de alimentación complementaria, pero la recomendación de OMS y AEP es esperar a los 6 meses.", "No hay ningún alimento que haga dormir más: no existe evidencia de ello."], biberon: ["Unos 180 ml por toma, 4-5 veces al día.", "Revisión de los 4 meses: pueden hablar de alimentación complementaria, pero la recomendación es esperar a los 6 meses."] },
+    actividad: { nombre: "Sentado con apoyo", descripcion: "Siéntalo en tu regazo o apoyado en un cojín firme y déjale explorar el entorno desde esa postura. Le encanta la perspectiva vertical. Pon juguetes delante para que intente alcanzarlos. No lo dejes solo en esta posición, puede caer." },
+    alerta: "Revisión de los 4 meses con el pediatra. Vacunas según el calendario de tu comunidad autónoma.",
+    consejo: "A los 4 meses el bebé empieza a balbucear con intención. Respóndele siempre: cada intercambio vocal es un paso en el desarrollo del lenguaje."
+  },
+  17: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Agarra objetos y los sacude, golpea y tira intencionalmente.", "Empieza a balbucear combinando vocales y consonantes: 'ba', 'ma', 'da'.", "Le gusta mirarse en el espejo e interactuar con su reflejo.", "La coordinación ojo-mano es notablemente mejor."] },
+    sueno: { titulo: "Sueño", items: ["Si la regresión del sueño sigue activa, ten paciencia: es temporal.", "Algunos bebés empiezan a consolidar un período nocturno más largo.", "Total diario: 12-15 horas."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Sigue a demanda. Cualquier cambio en el patrón de tomas es normal en esta etapa.", "Sigue sin necesitar ningún alimento adicional."], biberon: ["Unos 180 ml por toma, 4-5 veces al día.", "Sigue sin necesitar ningún alimento adicional hasta los 6 meses."] },
+    actividad: { nombre: "Bloques suaves", descripcion: "Ofrécele bloques blandos o juguetes que pueda agarrar, golpear y pasar de mano en mano. A esta edad empieza a explorar activamente causa-efecto: si golpeo esto, suena. Deja que explore a su ritmo sin intervenir más de lo necesario." },
+    alerta: "Si el balanceo de la cabeza o los movimientos oculares son asimétricos o irregulares, consulta con el pediatra.",
+    consejo: "Es buen momento para cantar rimas con gestos: las palmas, el 'cinco lobitos', el 'pin pon'. Le ayudan a anticipar secuencias y desarrollan el ritmo y la atención."
+  },
+  18: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Puede que ya se siente brevemente sin apoyo, aunque todavía con poca estabilidad.", "Muestra emociones más complejas: alegría intensa, frustración, algo parecido a la vergüenza.", "Reconoce su nombre y gira la cabeza hacia quien lo llama.", "Muestra interés por lo que comen los adultos, aunque no esté preparado para comerlo."] },
+    sueno: { titulo: "Sueño", items: ["Para muchos bebés el sueño empieza a mejorar tras la regresión.", "Total diario: 12-15 horas, con 3 siestas que pueden empezar a reducirse a 2.", "Las rutinas nocturnas son ya muy útiles para facilitar el sueño."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Sigue a demanda. El interés del bebé por la comida que ves en la mesa no indica que esté listo para comerla.", "La OMS y la AEP recomiendan esperar a los 6 meses. Quedan pocas semanas."], biberon: ["Unos 180-210 ml por toma, 4-5 veces al día.", "El babeo intenso y el interés por la comida no son señales de madurez suficiente. La recomendación es esperar a los 6 meses."] },
+    actividad: { nombre: "Exploración táctil", descripcion: "Prepara una bandeja con materiales de diferentes texturas: arroz seco, pasta, trozos de tela, papel de burbujas. Déjale explorar con las manos bajo tu supervisión total. Estimula el sentido del tacto, la curiosidad y la coordinación fina. Nunca lo dejes solo." },
+    alerta: "Si a los 4-5 meses no agarra objetos, no se lleva cosas a la boca, no balbucea o no muestra interés por el entorno, consulta con el pediatra.",
+    consejo: "El babeo intenso a esta edad no indica que esté preparado para comer: es parte del desarrollo de las glándulas salivares y la preparación para la dentición."
+  },
+  19: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Se sienta con cada vez menos apoyo y mejora la estabilidad del tronco.", "Alcanza objetos fuera de su campo de visión inmediata.", "El balbuceo es más largo y entonado, imitando el ritmo del habla adulta.", "Puede mostrar ansiedad ante desconocidos: es un hito del desarrollo normal."] },
+    sueno: { titulo: "Sueño", items: ["Total diario: 12-15 horas.", "Muchos bebés consolidan 2-3 siestas al día.", "Puede aparecer una mejora del sueño nocturno respecto a las semanas anteriores."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Sigue a demanda. Estás a pocas semanas de poder iniciar la alimentación complementaria.", "Empieza a informarte sobre cómo introducir la alimentación complementaria a los 6 meses: BLW o purés, ambos son válidos."], biberon: ["Unos 210 ml por toma, 4-5 veces al día.", "Empieza a informarte sobre cómo introducir la alimentación complementaria a los 6 meses. BLW o purés, ambos son válidos."] },
+    actividad: { nombre: "Canciones con anticipación", descripcion: "Canta canciones con gestos que el bebé ya conoce y para antes del final para ver si lo anticipa: '...y cinco lobitos tiene la loba...' y espera. Verás cómo su cara cambia porque espera el final. Esto trabaja la memoria, la atención y la anticipación." },
+    alerta: "El miedo a desconocidos que puede aparecer estas semanas es completamente normal. No lo fuerces a interactuar con personas que no conoce.",
+    consejo: "Empieza a pensar en cómo vas a introducir la alimentación complementaria en unas semanas. La OMS y la AEP recomiendan esperar a los 6 meses y que el bebé muestre señales de madurez."
+  },
+  20: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Cinco meses: el bebé ya parece un explorador activo del entorno.", "Se sienta con apoyo con bastante estabilidad.", "Pasa objetos de una mano a otra con soltura.", "La visión ya distingue todos los colores y sigue objetos con gran precisión."] },
+    sueno: { titulo: "Sueño", items: ["Total diario: 12-15 horas.", "Las siestas pueden empezar a consolidarse en 2-3 al día.", "Es buen momento para reforzar la rutina nocturna si no está establecida."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Sigue a demanda. El peso del bebé a los 5 meses generalmente se habrá duplicado respecto al nacimiento.", "Señales de madurez para la alimentación complementaria (aún no es el momento): se sienta con apoyo, ha desaparecido el reflejo de extrusión, muestra interés activo por la comida.", "La OMS y la AEP recomiendan esperar a los 6 meses."], biberon: ["Unos 210 ml por toma, 4-5 veces al día.", "El peso suele duplicarse alrededor de los 5 meses.", "La OMS y la AEP recomiendan esperar a los 6 meses para iniciar la alimentación complementaria."] },
+    actividad: { nombre: "Juego de causa-efecto", descripcion: "Ofrécele un juguete musical que haga sonido al pulsar, o una botella transparente con arroz dentro que suene al agitar. Disfruta descubriendo que sus acciones tienen consecuencias. Este tipo de juego es fundamental para el desarrollo cognitivo a esta edad." },
+    alerta: "Si a los 5 meses no se sienta con apoyo, no agarra objetos, no balbucea o no muestra interés por el entorno, consulta con el pediatra.",
+    consejo: "A los 5 meses le gusta mucho el juego de cucú-trás. Empieza a comprender que las personas existen aunque no las vea, lo que marca el inicio de la permanencia del objeto."
+  },
+  21: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Puede estar a punto de sentarse solo o ya lo consigue durante unos segundos.", "Le gusta tirar objetos al suelo y esperar a que se los devuelvas: es un juego intencional.", "Balbucea combinando más sílabas y variando la entonación.", "Puede mostrar preferencia clara por uno de sus padres o cuidadores."] },
+    sueno: { titulo: "Sueño", items: ["Total diario: 12-14 horas.", "Algunos bebés consolidan 2 siestas al día.", "De media a los 6 meses más de la mitad de los bebés se despierta al menos 3 veces por la noche. Es fisiológicamente normal."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Sigue a demanda. La leche materna sigue siendo el alimento principal.", "Si el pediatra da el visto bueno y el bebé muestra señales de madurez, la alimentación complementaria puede estar muy próxima."], biberon: ["Unos 210-240 ml por toma, 4-5 veces al día.", "Habla con el pediatra en la próxima revisión sobre cuándo iniciar la alimentación complementaria."] },
+    actividad: { nombre: "Bloques y recipientes", descripcion: "Dale un recipiente de plástico y objetos que quepan dentro (como tapones grandes o bloques). Le encantará meter y sacar. Este juego trabaja la causa-efecto, la coordinación mano-ojo y el inicio de la comprensión del espacio." },
+    alerta: "Ahora que está más activo, revisa la seguridad del entorno: enchufes cubiertos, objetos pequeños fuera de su alcance, esquinas protegidas.",
+    consejo: "Habla con tu pediatra en la próxima revisión sobre cómo y cuándo empezar la alimentación complementaria. Hay diferentes enfoques (BLW, purés, mixto) y todos son válidos si se hacen bien."
+  },
+  22: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Muchos bebés ya se sientan solos con estabilidad.", "Puede empezar a ponerse de pie agarrándose a los muebles.", "El juego es ya claramente intencional: busca objetos, los examina, los suelta.", "Muestra emociones complejas: alegría, frustración, sorpresa, algo parecido al miedo."] },
+    sueno: { titulo: "Sueño", items: ["Total diario: 12-14 horas.", "Las siestas suelen ser 2 al día: una larga de mañana y una más corta de tarde.", "Los despertares nocturnos siguen siendo habituales y normales."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["A demanda. Si ya han empezado los sólidos, la leche materna sigue siendo lo primero: los sólidos complementan, no sustituyen.", "Introduce los alimentos nuevos de uno en uno, con 3-5 días entre cada uno, para detectar posibles alergias."], biberon: ["Unos 210-240 ml por toma, 4-5 veces al día.", "Si ya han empezado los sólidos, la fórmula sigue siendo la base de la nutrición. Los sólidos complementan, no sustituyen."] },
+    actividad: { nombre: "Primeros sólidos como exploración", descripcion: "Si ya ha comenzado la alimentación complementaria, deja que explore los alimentos con las manos antes de llevárselos a la boca. Tocar, aplastar y oler un trozo de plátano o brócoli cocido es aprendizaje, no desorden. La exploración sensorial de la comida es parte del proceso." },
+    alerta: "Si ya has iniciado la alimentación complementaria y observas signos de alergia (ronchas, hinchazón, dificultad para respirar) tras introducir un alimento nuevo, consulta urgente.",
+    consejo: "Introduce los alimentos nuevos de uno en uno, con 3-5 días entre cada nuevo alimento, para poder identificar posibles reacciones alérgicas."
+  },
+  23: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Se arrastra o gatea, o está a punto de hacerlo. La movilidad da un salto enorme.", "Imita sonidos y gestos con mucha más precisión.", "Responde a su nombre de forma consistente.", "Muestra gran interés por los espejos, las fotos y otras caras."] },
+    sueno: { titulo: "Sueño", items: ["Total diario: 12-14 horas.", "Las nuevas habilidades motoras (arrastrarse, gatear) pueden alterar el sueño temporalmente.", "Mantén la rutina nocturna como ancla."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Sigue a demanda. La leche materna complementa la alimentación sólida y sigue siendo fuente de nutrición, inmunidad y consuelo.", "Si ha empezado con sólidos: ofrece variedad de sabores y texturas. No hay prisa."], biberon: ["Unos 210-240 ml, 3-4 veces al día según apetito.", "Si ha empezado con sólidos, la fórmula sigue siendo la base. Ajusta cantidades según el apetito del bebé."] },
+    actividad: { nombre: "Circuito de gateo", descripcion: "Crea un pequeño circuito en el suelo con cojines, mantas enrolladas y objetos interesantes al final. Anímale a llegar hasta ellos gateando o arrastrándose. Esto fortalece los brazos, las piernas y el tronco, y estimula la planificación motora." },
+    alerta: "Ahora que se mueve, la seguridad del entorno es crítica: escaleras con barandilla o bloqueadas, objetos pequeños recogidos, agua en el suelo vigilada.",
+    consejo: "El gateo es muy importante para el desarrollo neurológico. No lo saltes aunque pueda tenerse en pie: cuantos más meses gateando, mejor."
+  },
+  24: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Seis meses: hito mayor. El bebé es ya un participante activo del mundo.", "Se sienta solo con estabilidad y puede girarse para alcanzar objetos.", "Puede estar empezando a ponerse de pie agarrándose a los muebles.", "El balbuceo es rico y variado: 'mama', 'baba', 'dada', aunque sin significado aún."] },
+    sueno: { titulo: "Sueño", items: ["Total diario: 12-14 horas.", "La mayoría de los bebés de 6 meses se despierta al menos 3 veces por la noche: es estadísticamente normal.", "Cuando cumple los 6 meses, algunos bebés pueden dormir tramos más largos de forma espontánea."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Seis meses: si el pediatra lo confirma y el bebé muestra señales de madurez, es el momento de iniciar la alimentación complementaria.", "Señales de madurez (AEP): se sienta con apoyo, ha desaparecido el reflejo de extrusión, muestra interés activo por la comida y es capaz de llevarla a la boca.", "La leche materna sigue siendo la base. Los sólidos complementan, no sustituyen."], biberon: ["Seis meses: si el pediatra lo confirma y el bebé muestra señales de madurez, es el momento de iniciar la alimentación complementaria.", "La fórmula sigue siendo la base. Los sólidos complementan, no sustituyen.", "Primer alimento: no hay un orden obligatorio. Verduras, frutas, legumbres, carnes, pescado... todos son válidos desde el inicio."] },
+    actividad: { nombre: "Libros interactivos", descripcion: "Siéntate con él y pasa las páginas de un libro de cartón con imágenes grandes y sencillas. Nombra lo que ves. No hace falta leer el texto: la interacción, el señalar y el nombrar son el aprendizaje. A los 6 meses el cerebro absorbe vocabulario como una esponja." },
+    alerta: "Revisión de los 6 meses con el pediatra. Vacunas según el calendario. Buena oportunidad para recibir orientación personalizada sobre la alimentación complementaria.",
+    consejo: "La alimentación complementaria es un proceso gradual. El objetivo a los 6 meses no es que coma cantidades, sino que explore sabores y texturas. La leche sigue siendo lo principal."
+  },
+  25: {
+    desarrollo: { titulo: "Desarrollo esta semana", items: ["Se mueve con más confianza: gira, se arrastra o gatea para explorar.", "Agarra objetos con los dedos índice y pulgar (inicio del agarre de pinza).", "Entiende el concepto de permanencia del objeto: busca un juguete que ha visto esconder.", "Muestra ansiedad por separación: llora cuando te vas, incluso momentáneamente."] },
+    sueno: { titulo: "Sueño", items: ["Total diario: 12-14 horas.", "La ansiedad por separación puede empezar a afectar el sueño.", "Mantén la rutina nocturna: la predictibilidad le da seguridad."] },
+    alimentacion: { titulo: "Alimentación", pecho: ["Si ha iniciado la alimentación complementaria: sigue introduciendo alimentos nuevos de uno en uno, con varios días entre cada uno.", "La leche materna sigue siendo la base de la nutrición.", "Los alergénicos (huevo, pescado, cacahuete, gluten) deben introducirse también, no evitarse: la evidencia indica que retrasarlos no previene alergias."], biberon: ["Si ha iniciado la alimentación complementaria: sigue introduciendo alimentos nuevos de uno en uno, con varios días entre cada uno.", "Unos 210-240 ml de fórmula, 3-4 veces al día.", "Los alergénicos (huevo, pescado, cacahuete, gluten) deben introducirse también, no evitarse."] },
+    actividad: { nombre: "Esconder y encontrar", descripcion: "Esconde un juguete debajo de un pañuelo mientras él mira y pregúntale '¿dónde está?' Verás cómo lo busca y se emociona al encontrarlo. Esto trabaja la permanencia del objeto, que es uno de los grandes hitos cognitivos de este momento." },
+    alerta: "Si a los 6 meses no se sienta con apoyo, no agarra objetos, no balbucea o no muestra interés por el entorno, consulta con el pediatra.",
+    consejo: "La ansiedad por separación es una señal de vínculo sano. No la ignores ni la fuerces: respóndele, dale seguridad y el proceso se irá regulando solo."
+  }
+};
+
+function getWeekData(weekNum) {
+  const keys = Object.keys(weeklyData).map(Number).sort((a,b) => a-b);
+  let closest = keys[0];
+  for (const k of keys) { if (k <= weekNum) closest = k; }
+  return weeklyData[closest];
+}
+
+function showGuide() {
+  const input = document.getElementById('birthdate').value;
+  if (!input) { alert('Por favor, introduce la fecha de nacimiento.'); return; }
+
+  const birth = new Date(input + 'T00:00:00');
+  const now = new Date();
+  const totalDays = Math.floor((now - birth) / (1000 * 60 * 60 * 24));
+
+  if (totalDays < 0) { alert('La fecha de nacimiento no puede ser en el futuro.'); return; }
+
+  const weekNum = Math.floor(totalDays / 7);
+  const months = Math.floor(totalDays / 30);
+  const remainingDays = totalDays % 30;
+
+  let ageText = '';
+  if (months > 0) {
+    ageText = months + (months === 1 ? ' mes' : ' meses') + (remainingDays > 0 ? ' y ' + remainingDays + ' días' : '') + ' · semana ' + (weekNum + 1);
+  } else {
+    ageText = totalDays + ' días · semana ' + (weekNum + 1) + ' de vida';
+  }
+
+  document.getElementById('weekBadge').textContent = 'Semana ' + (weekNum + 1);
+  document.getElementById('ageDisplay').textContent = ageText;
+
+  const data = getWeekData(weekNum);
+
+  const dotColors = ['dot-verde', 'dot-azul', 'dot-naranja', 'dot-amarillo', 'dot-rojo', 'dot-morado'];
+
+  const feedingContent =
+    '<div class="feeding-grid">' +
+    '<div class="feeding-block">' +
+    '<div class="feeding-label label-pecho"><span></span>Lactancia materna</div>' +
+    '<ul class="item-list">' + data.alimentacion.pecho.map(i => '<li>' + i + '</li>').join('') + '</ul>' +
+    '</div>' +
+    '<div class="feeding-block">' +
+    '<div class="feeding-label label-biberon"><span></span>Biberón / fórmula</div>' +
+    '<ul class="item-list">' + data.alimentacion.biberon.map(i => '<li>' + i + '</li>').join('') + '</ul>' +
+    '</div>' +
+    '</div>';
+
+  const sections = [
+    { dot: dotColors[0], title: data.desarrollo.titulo, content: '<ul class="item-list">' + data.desarrollo.items.map(i => '<li>' + i + '</li>').join('') + '</ul>', type: 'card' },
+    { dot: dotColors[1], title: data.sueno.titulo, content: '<ul class="item-list">' + data.sueno.items.map(i => '<li>' + i + '</li>').join('') + '</ul>', type: 'card' },
+    { dot: dotColors[2], title: data.alimentacion.titulo, content: feedingContent, type: 'plain' },
+    { dot: dotColors[3], title: 'Actividad en casa', content: '<div class="activity-name">' + data.actividad.nombre + '</div><p>' + data.actividad.descripcion + '</p>', type: 'activity' },
+    { dot: dotColors[4], title: 'Consulta con el pediatra si...', content: data.alerta, type: 'alert' },
+    { dot: dotColors[5], title: 'Consejo de la semana', content: '<p>' + data.consejo + '</p>', type: 'tip' }
+  ];
+
+  document.getElementById('guideContent').innerHTML = sections.map((s, i) =>
+    '<div class="section" style="animation-delay:' + (i * 0.08) + 's">' +
+    '<div class="section-header"><div class="section-dot ' + s.dot + '"></div><h2 class="section-title">' + s.title + '</h2></div>' +
+    (s.type === 'card' ? '<div class="card">' + s.content + '</div>'
+      : s.type === 'plain' ? s.content
+      : s.type === 'activity' ? '<div class="activity-card">' + s.content + '</div>'
+      : s.type === 'alert' ? '<div class="alert-card">' + s.content + '</div>'
+      : '<div class="tip-card">' + s.content + '</div>') +
+    '</div>'
+  ).join('') + '<p class="refresh-note">La información se actualiza automáticamente según la edad del bebé.</p>';
+
+  document.getElementById('screen-home').style.display = 'none';
+  document.getElementById('screen-guide').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function goBack() {
+  document.getElementById('screen-home').style.display = 'flex';
+  document.getElementById('screen-guide').style.display = 'none';
+}
+
+// Si hay fecha guardada en la URL (por ejemplo ?d=2026-04-16), úsala directamente
+const params = new URLSearchParams(window.location.search);
+if (params.get('d')) {
+  document.getElementById('birthdate').value = params.get('d');
+  showGuide();
+}
+</script>
+</body>
+</html>
